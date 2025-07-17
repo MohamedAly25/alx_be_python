@@ -1,33 +1,27 @@
-# daily_reminder.py
 
-# Ask user to enter a task description
 task = input("Enter your task: ").strip()
-
-# Ask user to enter the task's priority
 priority = input("Priority (high/medium/low): ").strip().lower()
-
-# Ask user if the task is time-bound
 time_bound = input("Is it time-bound? (yes/no): ").strip().lower()
 
-# Start processing the reminder
-match priority:
-    case "high":
-        message = f"Reminder: '{task}' is a high priority task"
-    case "medium":
-        message = f"Reminder: '{task}' is a medium priority task"
-    case "low":
-        message = f"Note: '{task}' is a low priority task"
-    case _:
-        message = f"Note: '{task}' has an unknown priority level"
-
-# Add urgency if the task is time-bound
-if time_bound == "yes":
-    message += " that requires immediate attention today!"
+# Validate priority input
+valid_priorities = {"high", "medium", "low"}
+if priority not in valid_priorities:
+    print("Error: Invalid priority. Please enter 'high', 'medium', or 'low'.")
 else:
-    if priority == "low":
-        message += ". Consider completing it when you have free time."
-    else:
-        message += "."
-
-# Display the final customized reminder
-print(message)
+    # Process the task based on priority and time sensitivity
+    match priority:
+        case "high":
+            if time_bound == "yes":
+                print(f"Reminder: '{task}' is a high priority task that requires immediate attention today!")
+            else:
+                print(f"Note: '{task}' is a high priority task. Try to address it soon.")
+        case "medium":
+            if time_bound == "yes":
+                print(f"Reminder: '{task}' is a medium priority task that should be completed today.")
+            else:
+                print(f"Note: '{task}' is a medium priority task. Complete it when convenient.")
+        case "low":
+            if time_bound == "yes":
+                print(f"Reminder: '{task}' is a low priority task but still time-bound. Try to finish it today.")
+            else:
+                print(f"Note: '{task}' is a low priority task. Consider completing it when you have free time.")
