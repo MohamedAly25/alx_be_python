@@ -1,21 +1,17 @@
 def display_menu():
-    # Display the menu options
-    print("\nShopping List Manager")
+    print("Shopping List Manager")
     print("1. Add Item")
     print("2. Remove Item")
     print("3. View List")
     print("4. Exit")
 
 def main():
-    # Initialize an empty shopping list
     shopping_list = []
-
     while True:
-        # Show the menu every loop
         display_menu()
-
+        choice = input("Enter your choice: ")
         try:
-            choice = int(input("Enter your choice (1-4): "))
+            choice = int(choice)
         except ValueError:
             print("Invalid input. Please enter a number between 1 and 4.")
             continue
